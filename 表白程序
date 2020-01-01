@@ -1,0 +1,69 @@
+from concurrent.futures import thread
+from tkinter import *
+import tkinter as tk
+import random
+import threading
+import time
+def dow():
+    window = tk.Tk()
+    width = window.winfo_screenwidth()
+    height = window.winfo_screenheight()
+    a = random.randrange(0, width)
+    b = random.randrange(0, height)
+    window.title('表白？不存在的')
+    window.geometry("200x50" + "+" + str(a) + "+" + str(b))
+    tk.Label(window,
+             text='你肯定选的喜欢我',  # 标签的文字
+             bg='Red',  # 背景颜色
+             font=('楷体', 17),  # 字体和字体大小
+             width=15, height=2  # 标签长宽
+             ).pack()  # 固定窗口位置
+    window.mainloop()
+
+
+class YouLikeMe:
+    def __init__(self):
+        window = Tk()
+        label = Label(window, text='你是不是喜欢我？')
+        self.btyes = Button(window, text='不是',command=window.destroy, height=1, width=6)
+        self.btno = Button(window, text='是的',command=window.destroy, height=1, width=6)
+        label.place(x=60, y=70)
+        self.btyes.place(x=40, y=130)
+        self.btno.place(x=120, y=130)
+        self.btyes.bind('<Enter>', self.event1)  # 将按钮与鼠标事件绑定，<Enter>是指鼠标光标进入按钮区域
+        self.btno.bind('<Enter>', self.event2)
+        window.mainloop()
+    def event1(self, event):  # 切换按钮文字
+        self.btyes['text'] = '是的'
+        self.btno['text'] = '不是'
+
+    def event2(self, event):
+        self.btyes['text'] = '不是'
+        self.btno['text'] = '是的'
+
+window = Tk()
+label = Label(window, text='以下内容单身狗勿独自观看')
+label.place(x=20, y=80)
+button = Button(window, text='确定', command=window.destroy)
+button.place(x=80, y=150)
+window.mainloop()
+
+YouLikeMe()
+threads = []
+for i in range(100):  # 需要的弹框数量
+    t = threading.Thread(target=dow)
+    threads.append(t)
+    time.sleep(0.1)
+    threads[i].start()
+window=Tk()
+label = Label(window, text='没想到吧')
+label.place(x=50, y=80)
+button = Button(window, text='确定', command=window.destroy)
+button.place(x=80, y=150)
+window.mainloop()
+window = Tk()
+label = Label(window, text='关闭窗口也改变不了你喜欢我的事实')
+label.place(x=2, y=80)
+button = Button(window, text='确定', command=window.destroy)
+button.place(x=80, y=150)
+window.mainloop()
